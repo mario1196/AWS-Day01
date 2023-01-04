@@ -4,6 +4,8 @@ const app = express();
 
 app.use(express.static("build"))
 
+app.use(express.urlencoded({ extended: false }));
+
 //app.get("/", (req, res) => {
 //  console.log("GET /")
 //  res.send("<h1>hello aws</h1>")
@@ -13,9 +15,14 @@ const pokemons = [
   {
     id: 1,
     name: "Pikachu",
-    type: "electric ⚡️",
-    level: 99,
-    image: "/pikachu.webp"
+    type: "Electric",
+    level: 99
+  },
+  {
+    id: 2,
+    name: "Charmander",
+    type: "Fire",
+    level: 99
   }
 ]
 
@@ -29,7 +36,8 @@ app.post("/api/pokemons", (req, res) => {
   console.log("POST /api/pokemons", data)
   data.id = pokemons.length+1
   pokemons.push(data)
-  res.send(data)
+  //res.send(data)
+  res.redirect('/')
 })
 
 app.get('*', (req, res) => {
